@@ -1,28 +1,30 @@
-import ProfilImage from "./ProfileImage";
+import ProfileImage from "./ProfileImage";
 import User from "./User";
 import Timestamp from "./Timestamp";
 import Message from "./Message";
 import Action from "./Actions";
 
-function Tweet({ tweet }) {
+function Tweet(props) {
   return (
-    <div className="tweet">
-      <ProfilImage image={tweet.user.image} />
+    <>
+      {props.tweet.map((prop, index) => (
+        <div key={index} className="tweet">
+          <ProfileImage image={prop.user.image} />
 
-      <div className="body">
-        <div className="top">
-          <User name={tweet.user.name} handle={tweet.user.handle} />
+          <div className="body">
+            <div className="top">
+              <User name={prop.user.name} handle={prop.user.handle} />
 
-          <Timestamp time={tweet.timestamp} />
+              <Timestamp time={prop.timestamp} />
+            </div>
+
+            <Message message={prop.message} />
+
+            <Action />
+          </div>
         </div>
-
-        <Message message={tweet.message} />
-
-        <Action />
-      </div>
-
-      <i className="fas fa-ellipsis-h"></i>
-    </div>
+      ))}
+    </>
   );
 }
 
